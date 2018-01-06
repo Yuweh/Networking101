@@ -1,0 +1,55 @@
+    /***************************************************************/
+    
+    // Google Web API received here
+    public func getNearbyLocationsWithLocation(location: CLLocation) {
+        //modification "insterted"
+        let urlString : String = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=A***** Google API Key Here! *******&location="
+        let latitude:String = "\(location.coordinate.latitude)"
+        let longitude:String = "\(location.coordinate.longitude)"
+        let radius = String(regionRadius)
+        let keyword = String("atm")
+        let firstString = urlString + latitude + "," + longitude
+        let secondString = "&radius=" + radius + "&keyword=" + keyword
+        let newString = firstString + secondString
+        rootSearchURL = newString
+        let url = URL(string: newString)
+        newTableURL = newString
+        self.getAllNearbyLocations(url: url!)
+        //self.getNearbyLocationsOnce(url: url!)
+        print("***************************** Google API Successfuly Received! **********************************")
+    }
+    
+        /***************************************************************/
+    
+    // This function loops over the returned JSON until we have recevied all the info
+    func getAllNearbyLocations(url: URL) {
+        
+        self.getJsonFromURL(url: url) { (dictionary) in
+            
+            let newLocations: NSArray = dictionary.value(forKey: "results") as! NSArray
+            self.locations.addObjects(from: newLocations as! [Any])
+            self.sendNewLocations(locations: self.locations)
+            self.locations.removeAllObjects()
+        
+            // TODO Remove this check
+            if self.locations.count == 20 {
+                print("***************************** RECEIVED 20 API Locations **********************************")
+            } else {
+                    print("***************************** More than 20 API Locations received **********************************")
+                }
+            }
+        }
+    
+
+    /***************************************************************/
+    
+    // This function returns the JSON from a specific URL
+    func getJsonFromURL(url: URL, completionHandler: @escaping (NSDictionary) -> ()) {
+        Alamofire.request(url).responseJSON { response in
+            let json = response.result.value as! NSDictionary
+            completionHandler(json)
+        }
+    }
+    
+}
+    /***************************************************************/
