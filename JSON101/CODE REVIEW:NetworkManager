@@ -2,13 +2,11 @@
 
 import Alamofire
 import Foundation
-// Base Address and Headers (replace as needed)
-private let GBAServerBaseAddress = "http://10.10.10.30:80/gba-webservice-1.0" //local
-//private let GBAServerBaseAddress = "http://dev.gbaccess.com" //public
+
 private var serverHeaders =
     [   "Accept" : "application/json",
         "app_id": "1",
-        "app_secret": "Go5mKa5frWN5ppzNtKcUudeYMfFNLADPQLnVqFGR",
+        "app_secret": "------",
         "token": ""]
 
 // MARK: - Router Protocol and Route Struct
@@ -37,7 +35,7 @@ protocol Router: URLRequestConvertible{
 extension Router{
     func asURLRequest() throws -> URLRequest {
         let method: HTTPMethod = self.route.method
-        var url: URL = URL(string: GBAServerBaseAddress)!.appendingPathComponent(self.baseComponent)
+        var url: URL = URL(string: ServerBaseAddress)!.appendingPathComponent(self.baseComponent)
         if self.route.suffix != "" { url = url.appendingPathComponent(self.route.suffix) }
         _ = (self.route.token != nil) ? (serverHeaders.updateValue(route.token!, forKey: "token")): ("")
         
