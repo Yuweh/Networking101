@@ -7,14 +7,14 @@
 //PinAuthentication.swift
 //First:
 class PinAuthentication: Object {
-    dynamic var mobileNumber: String?
-    var usersList: List<Users>()
+    @objc dynamic var mobileNumber: String?
+    var usersList = List<Users>()
 }
 
 //Second:
 class Users: Object {
-    dynamic var userNumber: String?
-    dynamic var pinNumber: String?
+   @objc dynamic var userNumber: String?
+   @objc dynamic var pinNumber: String?
 }
 
 //****************************************** 1st VC ***********************************************************
@@ -33,7 +33,6 @@ func viewDidLoad(){
 //****************************************** 2nd VC ***********************************************************
 
 //Read this data in SecondViewController in ViewDidLoad
-
 var pinUsers: Results<PinAuthentication>?
 
 func viewDidLoad(){
@@ -43,7 +42,7 @@ func viewDidLoad(){
 
 //****************************************** IBaction ***********************************************************
 
-@IBAction func addDog(){
+@IBAction func addNewPinUser(){
     let newUser = Users()
     newUser.userNumber = "+639987771122"
     newUser.pinNumber = "0"
@@ -52,8 +51,39 @@ func viewDidLoad(){
     // in this place my application crashed
 }
 
+//****************************************** Validation / Querying / Filter ***********************************************************
 
 
 
+
+//****************************************** Protocols ***********************************************************
+
+//Protocols
+protocol SaveNewPinCodeUser {
+    func addNewUser(userName: String, pin: String)
+    func processNewUser(newUserNumber: String)
+}
+
+//Log-in Tapped
+self.processNewUser(newusernumber: self.mobileNumber_textField.text, pin: "0")
+
+//Extensions
+extension LoginViewController: SaveNewPinCodeUser {
+//1.
+    func addNewUser(user: String, pin: String) {
+        let newUser = PinCodeUser(id: UserNumber, mobile: String, pin: String)
+        do {
+            try GBARealm.write {
+                GBARealm.add(newUser, update: true)
+                processPin.users.append(newUser)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+//2.
+    func processNewUser(newusernumber: String, pin: String){
+    }
+}
 
 
