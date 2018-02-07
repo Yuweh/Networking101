@@ -5,7 +5,7 @@
 //Create 2 Realm Objects:
 
 //PinAuthentication.swift
-//First:
+//First: ->< not used
 class PinAuthentication: Object {
     @objc dynamic var mobileNumber: String?
     var usersList = List<Users>()
@@ -15,7 +15,48 @@ class PinAuthentication: Object {
 class Users: Object {
    @objc dynamic var userNumber: String?
    @objc dynamic var pinNumber: String?
+    
+       override static func primaryKey() -> String {
+        return "userNumber"
+    }     
 }
+
+//third Object
+//Protocols
+protocol UserLogInPreferrence {
+    func addNewLogInUser(userMobileNumber: String)
+}
+
+//Realm Object
+class UserLogInTypes: Object {
+    @objc dynamic var userNumber: String?
+    @objc dynamic var logInType: String? // // if 2, TouchID enabled, if 1, PinCode enabled, if 0, default or Password Only enabled
+    
+    override static func primaryKey() -> String {
+        return "userNumber"
+    }    
+} 
+
+//fourth
+   
+//Protocols
+protocol PrimaryUserLogIn {
+    func addPrimaryLogInUser(userMobileNumber: String)
+}
+
+//Realm Object
+class PrimaryUser: Object {
+    @objc dynamic var primaryUser: String? = "Primary"
+    @objc dynamic var userNumber: String? = ""
+    @objc dynamic var userPassword: String? = ""
+    @objc dynamic var logInType: String?   // // if 2, TouchID enabled, if 1, PinCode enabled, if 0, default or Password Only enabled
+    
+    override static func primaryKey() -> String {
+        return "primaryUser"
+    }
+}
+
+
 
 //****************************************** 1st VC ***********************************************************
 
