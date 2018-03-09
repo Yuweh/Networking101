@@ -49,7 +49,7 @@
                         multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
                     }
                 },
-                to: "http://10.10.10.30:80/gba-webservice-1.0/images",
+                to: "888888888",
                 encodingCompletion: { encodingResult in
                     switch encodingResult {
                     case .success(let upload, _, _):
