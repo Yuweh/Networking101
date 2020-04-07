@@ -41,6 +41,26 @@
 
 //====================================================================================
 
+AWS102
+- Core concepts of cloud computing
+- AWS Certified Cloud Practitioner exam
+- Security Domain
+- Security in the cloud
+- Shared responsibility model
+- Well architected framework
+- Principle of least privilege
+- AWS Cloud compliance
+- Study break: security domain
+- Identity and Access Management (IAM)
+- Web Application Firewall
+- Shield
+- Inspector
+- Trusted Advisor
+- GuardDuty
+- Study break: reviewing security services
+- Study break: exam tips and resources
+- Next Steps
+
 //====================================================================================
 
 //  (っ˘▽˘)っ AWS103 - AWS for Newbies: Cloud Concepts ⊂(◕.◕⊂)
