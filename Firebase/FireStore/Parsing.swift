@@ -34,7 +34,7 @@ fileprivate func fetchCollection() {
     }
     
     func fetchDocument() {
-        let docRef = self.firestoreDB.collection("categories").document("TQbCGRhPMGkaSI9Nbqtq")
+        let docRef = self.firestoreDB.collection("categories").document("")
         
         docRef.addSnapshotListener { (snap, error) in
             self.categories.removeAll()
